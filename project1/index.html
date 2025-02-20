@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      .btn {
+        padding: 5px 5px;
+
+        background-color: blue;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        text-align: center;
+
+        font-size: 16px;
+        margin: 4px 2px;
+      }
+
+      .modal-content {
+        display: flex;
+        flex-direction: column;
+
+        justify-content: center;
+        align-items: center;
+      }
+      primary-btn {
+        padding: 5px 5px;
+
+        color: white;
+        border: none;
+        border-radius: 4px;
+        text-align: center;
+
+        font-size: 16px;
+        margin: 4px 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <button class="btn" onclick="createmodal()">open model</button>
+    <div class="modal" id="modals"></div>
+  </body>
+
+  <script>
+    function createmodal() {
+      let modal = document.getElementById("modals");
+      let modaldiv = document.createElement("div");
+      modal.className = "modal-content";
+      modal.innerHTML = `
+            <span class="close" onclick="closediv()">&times;</span>
+            <h2>Modal Title</h2>
+            <p>this is a modal tittle. u can put any html content here</p>
+            <button class="primary-btn" onclick="closediv()">Close</button>
+           
+            <button class="btn" onclick="closediv()">confirm</button>
+        
+            
+        `;
+        function closediv() {
+          modals.remove();
+        }
+      modal.appendChild(modaldiv);
+    }
+  </script>
+</html>
