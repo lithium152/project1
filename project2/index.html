@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      .container{
+    width: min(90%,85rem);
+    margin-inline: auto;
+}
+      .input-holder {
+        border-radius: 4px;
+        box-shadow: 0 5px 5px 0 #000000;
+        text-align: center;
+        display: flex;
+        justify-content:center ;
+        align-items: center;
+        padding: 20px;
+        gap:2rem;
+      }
+    </style>
+  <body>
+    <div class="wraper container">
+        <div class="input-holder">
+        <button onclick="accountCase()">Account</button>
+        <button onclick="passCase()">password</button>
+        </div>
+        <div class="form" id="forms"></div>
+      </div>
+    
+  </body>
+  <script>
+    function accountCase() {
+      let account = document.getElementById("forms");
+      let accountdiv = document.createElementN("div");
+      accountdiv.innerHTML = `<h1>Account</h1>
+    <p>Make changes to your account here. Click save when you're done.</p>
+     <label for="name">name</label>
+    <input type="text" placeholder="write ur name" required>
+     <label for="user">username</label>
+    <input type="text" placeholder="write ur userid" required>
+    <button>Save changes</button>`;
+      account.appendChild(accountdiv);
+    }
+    function passCase() {
+      let password = document.getElementById("forms");
+      let passwordDiv = document.createElementN("div");
+      passwordDiv.innerHTML = `<h1>Password</h1>
+    <p>Change your password here. After saving, you'll be logged out</p>
+     <label for="pass">Current password</label>
+    <input type="password" required>
+     <label for="newpass">New password</label>
+    <input type="password"  required>
+    <button>Save password</button>`;
+      password.appendChild(passwordDiv);
+    }
+  </script>
+</html>
