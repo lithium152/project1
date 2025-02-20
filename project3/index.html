@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        .post-holder {
+            display: flex;
+            flex-direction: column;
+          align-items: center;
+            justify-content: center;
+        }
+
+
+        .posts {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+        
+            gap: 20px;
+            padding: 20px;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .post {
+            background-color: white;
+            border: 1px solid #b1b1b1;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        @media screen and (max-width: 576px) {
+.posts{
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 20px;
+}
+
+        }
+    </style>
+</head>
+<body>
+ <div class="post-holder container">
+    <h1>Posts</h1>
+
+    <div class="posts" id="posts"></div>
+ </div>
+
+        <script>
+            const postsContainer = document.querySelector('#posts');
+
+            let posts = [];
+
+            const getPosts = () => {
+                fetch('https://dummyjson.com/posts')
+                    .then((response) => {
+                        return response.json();
+                    })
+                    .then((result) => {
+                        result.posts.forEach((post) => createPost(post));
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            };
+
+            getPosts();
+
+            const createPost = (post) => {
+                let postDiv = `
+                    <div class="post">
+                        <h6>Post ID: ${post.id}</h6>
+                        <h4>Tittle:${post.title}</h4>
+                        <p>Body:${post.body}</p>
+                        <h4>tages: ${post.tags}</h4>
+                        <h3>user id: ${post.userId}</h3>
+                        
+                    </div>    
+                `;
+                postsContainer.innerHTML += postDiv;
+            };
+        </script>
+  
+</body>
+</html>
