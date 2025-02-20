@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      .container {
+        width: min(90%, 85rem);
+        margin-inline: auto;
+      }
+      .video-holder {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .video {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 20px;
+        padding: 20px;
+        max-width: 1000px;
+      }
+      .video-item {
+      
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        gap: 5px;
+        padding: 20px;
+        max-width: 1000px;
+        margin: auto;
+      }
+      .video-item img{
+        width: 100%;
+        height: auto;
+      }
+      .video-item h1{
+        font-size: larger;
+        text-align: center;
+      }
+      
+      .video-item video {
+        width: 100%;
+        height: 300px;
+      }
+      @media screen and (max-width: 576px) {
+        .video {
+          grid-template-columns: 1fr;
+          gap: 20px;
+          padding: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="video-holder container">
+      <h1>video</h1>
+      
+      <div class="video" id="video"></div>
+    </div>
+  </body>
+  <script>
+    let videoContainer = document.querySelector("#video");
+
+    async function fetchvideo() {
+      const API_URL = `https://gist.githubusercontent.com/poudyalanil/ca84582cbeb4fc123a13290a586da925/raw/14a27bd0bcd0cd323b35ad79cf3b493dddf6216b/videos.json`;
+
+      try {
+        const response = await fetch(API_URL);
+        const result = await response.json();
+        displayvideo(result);
+        console.log(result);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    function displayvideo(videos) {
+      videos.forEach((video) => {
+        const videosDiv = document.createElement("div");
+videosDiv.classList.add("video-item");
+        videosDiv.innerHTML = `
+                     <h1>Tittle:${video.title}</h1>
+                    <p> ID:${video.id}</p>
+                    <h3>Time: ${video.uploadTime}</h3>
+                    <img src="${video.thumbnailUrl}">
+                    <p>Views: ${video.views}</p>
+                  <h4>Author:${video.author}</h4>
+                 <video ><source src="${video.videoUrl}"></video>
+                 <h1>Subscriber: ${video.subscriber}</h1>
+                `;
+        videoContainer.appendChild(videosDiv);
+      });
+    }
+    fetchvideo();
+  </script>
+</html>
